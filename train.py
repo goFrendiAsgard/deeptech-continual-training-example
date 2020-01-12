@@ -1,6 +1,7 @@
 import sys
 import pandas as pd
 import pickle
+from sklearn.neural_network import MLPClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 
@@ -11,7 +12,7 @@ def main(name):
     y = df["species"]
 
     # train classifier
-    clf = GaussianNB()
+    clf = MLPClassifier(alpha=1, max_iter=100)
     clf.fit(x, y)
 
     # measure accuracy
@@ -20,7 +21,7 @@ def main(name):
 
     # save accuracy
     with open("./accuracy/log.csv", "a") as accuracy_log:
-        accuracy_log.write(name + ", " + str(accuracy))
+        accuracy_log.write(name + ", " + str(accuracy) + "\n")
 
     # save model
     pickle.dump(clf, open("./model/" + name + ".model", "wb"))

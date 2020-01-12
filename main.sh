@@ -1,5 +1,7 @@
 #!/bin/sh
 
+python server.py &
+
 while [ 1 ]
 do
     CURRENT_DATE=$(date +"%Y-%m-%d-%T")
