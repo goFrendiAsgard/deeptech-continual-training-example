@@ -1,6 +1,6 @@
 #!/bin/sh
 
-python server.py &
+# python server.py &
 
 while [ 1 ]
 do
