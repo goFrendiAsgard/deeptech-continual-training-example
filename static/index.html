@@ -1,0 +1,42 @@
+<head>
+    <title>Simple ML Model</title>
+    <style>
+        #request-input {
+            width: 100%
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Test</h1>
+    <textarea
+        id="request-input">{"model": "latest", "sepal_length": 0.0, "sepal_width": 0.0, "petal_length": 0.0, "petal_width": 0.0}</textarea>
+    <br />
+    <button id="request-trigger" onclick="predict()">Predict</button>
+    <br />
+    <label>Prediction Result: </label>
+    <label id="request-result"></label>
+
+    <h1>Accuracy History</h1>
+    <img src="./accuracy-history" />
+
+    <script>
+        function predict() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log('success!', xhr);
+                    document.getElementById("request-result").innerHTML = xhr.responseText;
+                } else {
+                    console.error('The request failed!');
+                }
+            };
+
+            xhr.open('POST', './predict');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(document.getElementById("request-input").value);
+            console.log("woy");
+        }
+    </script>
+</body>
